@@ -267,12 +267,12 @@ function AppContent({ user, logout }) {
         playerNotes: 'Agregado desde lista de deseos'
       }
       
-      await addGame(newGame)
+      await currentAddGame(newGame)
       setToast({ message: `${gameData.name} agregado a tu lista de deseos`, type: 'success' })
     } catch (error) {
       setToast({ message: `Error: ${error.message}`, type: 'error' })
     }
-  }, [addGame, setToast])
+  }, [currentAddGame, setToast])
 
   if (gamesLoading || animesLoading) {
     return (

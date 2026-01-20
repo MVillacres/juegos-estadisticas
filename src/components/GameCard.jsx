@@ -2,7 +2,7 @@ import { useState } from 'react'
 import '../styles/GameCard.css'
 import '../styles/GameCardMenu.css'
 
-export default function GameCard({ game, isSearchResult = false, onRemove, onSelect, onEdit, onAddToWishlist, onRemoveFromWishlist, draggable = false, onDragStart, onDragEnd, onDragEnter, currentSection = 'games' }) {
+export default function GameCard({ game, isSearchResult = false, onRemove, onSelect, onEdit, onAddToWishlist, onRemoveFromWishlist, draggable = false, onDragStart, onDragEnd, onDragEnter, currentSection = 'games', isWishlist = false }) {
   const [imageError, setImageError] = useState(false)
 
   const handleSelect = () => {
@@ -59,10 +59,10 @@ export default function GameCard({ game, isSearchResult = false, onRemove, onSel
         <h3 className="card-title">{game.name}</h3>
         
         <div className="card-info">
-          {currentSection === 'games' && game.released && (
+          {!isWishlist && currentSection === 'games' && game.released && (
             <p className="info-item">{new Date(game.released).getFullYear()}</p>
           )}
-          {game.yearPlayed && (
+          {!isWishlist && game.yearPlayed && (
             <p className="info-item">{currentSection === 'games' ? 'Jugado' : 'Visto'}: {game.yearPlayed}</p>
           )}
           {currentSection === 'games' && game.hoursPlayed && (

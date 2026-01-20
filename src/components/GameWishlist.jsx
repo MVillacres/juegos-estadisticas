@@ -16,7 +16,7 @@ export default function GameWishlist({ games, onRemoveFromWishlist, onEditGame, 
     if (onRemoveFromWishlist) {
       onRemoveFromWishlist(gameId)
       if (setToast) {
-        setToast({ message: `${gameName} eliminado de tu lista de deseos`, type: 'info' })
+        setToast({ message: `${gameName} eliminado de tu ${currentSection === 'games' ? 'lista de deseos' : 'lista de animes por ver'}`, type: 'info' })
       }
     }
   }
@@ -34,7 +34,7 @@ export default function GameWishlist({ games, onRemoveFromWishlist, onEditGame, 
     if (onAddToWishlist) {
       onAddToWishlist(gameData)
       if (setToast) {
-        setToast({ message: `${gameData.name} agregado a tu lista de deseos`, type: 'success' })
+        setToast({ message: `${gameData.name} agregado a tu ${currentSection === 'games' ? 'lista de deseos' : 'lista de animes por ver'}`, type: 'success' })
       }
     }
   }
@@ -42,7 +42,7 @@ export default function GameWishlist({ games, onRemoveFromWishlist, onEditGame, 
   return (
     <div className="game-wishlist">
       <div className="wishlist-header">
-        <h2 className="wishlist-title">Lista de Deseos ({wishlistGames.length})</h2>
+        <h2 className="wishlist-title">{currentSection === 'games' ? 'Lista de Deseos' : 'Animes por Ver'} ({wishlistGames.length})</h2>
         <p className="wishlist-subtitle">{currentSection === 'games' ? 'Juegos que quieres jugar pronto' : 'Animes que quieres ver pronto'}</p>
       </div>
 
@@ -58,7 +58,7 @@ export default function GameWishlist({ games, onRemoveFromWishlist, onEditGame, 
         <div className="empty-wishlist">
           <div className="empty-content">
             <p className="empty-icon">♡</p>
-            <p className="empty-title">Tu lista de deseos está vacía</p>
+            <p className="empty-title">Tu {currentSection === 'games' ? 'lista de deseos' : 'lista de animes por ver'} está vacía</p>
             <p className="empty-subtitle">Usa la barra de arriba para agregar elementos</p>
           </div>
         </div>
@@ -74,6 +74,8 @@ export default function GameWishlist({ games, onRemoveFromWishlist, onEditGame, 
                 <GameCard 
                   game={game}
                   draggable={false}
+                  isWishlist={true}
+                  currentSection={currentSection}
                 />
               </div>
             ))}
